@@ -1,8 +1,7 @@
-use texture_extract::atlas_parser::{self, parse_atlas_file};
-
+use texture_extract::atlas_parser::parse_atlas_file;
 fn main() {
     println!("Hello, world!");
 
-    parse_atlas_file("mj_hupai.atlas");
+    let _ = parse_atlas_file("mj_hupai.atlas");
 
 }

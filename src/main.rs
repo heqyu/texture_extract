@@ -4,7 +4,6 @@ use std::io::{self, Write};
 use std::path::Path;
 use std::path::PathBuf;
 use std::process;
-use std::vec;
 use texture_extract::*;
 
 // 等待用户按任意键的函数
@@ -35,12 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
     let rotate_output = matches.get_flag("rotate");
-    let png_path = matches.get_one::<String>("input").unwrap_or_else(|| {
-        eprintln!("参数错误: ");
-        wait_for_user();
-        process::exit(1);
-    });
-
+    let png_path = matches.get_one::<String>("input").unwrap();
     let output_folder = matches.get_one::<String>("output").unwrap();
     let angle = matches.get_one::<String>("angle").unwrap().parse::<u32>().unwrap();
 
@@ -50,15 +44,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     let plist_path = Path::new(png_path).with_extension("plist");
-    let mut frames = vec![];
+    let atlast_path = Path::new(png_path).with_extension("atlas");
+    let frames;
     if plist_path.exists() {
+        println!("Plist 文件存在，将使用 plist 文件进行解析");
         frames = parse_plist_frames(plist_path)?;
+    } else if atlast_path.exists() {
+        println!("Atlas 文件存在，将使用 atlas 文件进行解析");
+        frames = parse_atlas_file(atlast_path)?;
     } else {
-        let atlast_path = Path::new(png_path).with_extension("atlas");
-        if atlast_path.exists() {
-            frames = parse_atlas_file(atlast_path)?;
-        }
+        panic!("未找到 plist 或 atlas 文件");
     }
+     
 
     // 读取整个图片
     let mut image = image::open(png_path)?;
