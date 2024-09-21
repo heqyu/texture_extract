@@ -1,0 +1,104 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'texture_extract'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=texture_extract"
+                ],
+                "filter": {
+                    "name": "texture_extract",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'texture_extract'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=texture_extract",
+                    "--package=texture_extract"
+                ],
+                "filter": {
+                    "name": "texture_extract",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "mj_hupai.png",
+                "eef"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'texture_extract'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=texture_extract",
+                    "--package=texture_extract"
+                ],
+                "filter": {
+                    "name": "texture_extract",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=test",
+                    "--package=texture_extract"
+                ],
+                "filter": {
+                    "name": "test",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=test",
+                    "--package=texture_extract"
+                ],
+                "filter": {
+                    "name": "test",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

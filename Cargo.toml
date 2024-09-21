@@ -1,9 +1,10 @@
 [package]
-name = "myplist"
+name = "texture_extract"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
 
 [dependencies]
 plist = "1.7.0"
 image = "0.25.2"
-clap = { version = "4.0", features = ["derive"] }
+clap = { version = "4.5.18", features = ["derive"] }
