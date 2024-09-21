@@ -1,10 +1,10 @@
-use atlas_parser::parse_atlas_file;
 use clap::{arg, Command};
 use std::io::{self, Write};
 use std::path::Path;
 use std::path::PathBuf;
 use std::process;
-use texture_extract::*;
+use texture_extract::parser::plist_parser;
+use texture_extract::parser::atlas_parser;
 
 // 等待用户按任意键的函数
 fn wait_for_user() {
@@ -48,10 +48,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let frames;
     if plist_path.exists() {
         println!("Plist 文件存在，将使用 plist 文件进行解析");
-        frames = parse_plist_frames(plist_path)?;
+        frames = plist_parser::parse(plist_path)?;
     } else if atlast_path.exists() {
         println!("Atlas 文件存在，将使用 atlas 文件进行解析");
-        frames = parse_atlas_file(atlast_path)?;
+        frames = atlas_parser::parse(atlast_path)?;
     } else {
         panic!("未找到 plist 或 atlas 文件");
     }

@@ -1,9 +1,9 @@
-use super::Frame;
+use crate::Frame;
 use std::error::Error;
 use std::fs;
 use std::path::Path;
 
-pub fn parse_atlas_file<P: AsRef<Path>>(file_path: P) -> Result<Vec<Frame>, Box<dyn Error>> {
+pub fn parse<P: AsRef<Path>>(file_path: P) -> Result<Vec<Frame>, Box<dyn Error>> {
     let contents = fs::read_to_string(file_path)?;
     let lines : Vec<&str> = contents.lines().skip(3).collect(); // 跳过前三行
 
